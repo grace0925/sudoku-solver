@@ -10,9 +10,9 @@ board = [
     [0, 4, 9, 2, 0, 6, 0, 0, 7]
 ]
 
+
 # print the board
 def print_board(board):
-
     for i in range(len(board)):
         if i % 3 == 0:
             print("-------------------------------")
@@ -24,4 +24,10 @@ def print_board(board):
             else:
                 print(str(board[i][j]) + "  ", end="")
 
-print_board(board)
+
+# find the first empty square for backtracking algorithm
+def first_empty(board):
+    for i in range(len(board)):
+        for j in range(len(board[0])):
+            if board[i][j] == 0:
+                return (i, j)  # return tuple (row, column)
