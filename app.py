@@ -10,6 +10,7 @@ class App:
         self.grid = BOARD
         self.selected = None
         self.mousePos = None
+        self.font=  pygame.font.SysFont("arial", CELL_SIZE//2)
         self.state = "game"
         self.gameButton = []
         self.menuButton = []
@@ -52,6 +53,9 @@ class App:
 
         if self.selected:
             self.draw_selected_cell(self.window, self.selected)
+
+        self.draw_numbers(self.window)
+
         self.draw_grid(self.window)
         pygame.display.update()
 
@@ -69,18 +73,25 @@ class App:
         pygame.draw.rect(window, BLACK, (GRID_POSITION[0], GRID_POSITION[1], GRID_WIDTH, GRID_HEIGHT), 4)
         # draw lines
         for x in range(1, 10):
-            if x % 3:
-                line_weight = 1
-            else:
-                line_weight = 4
             pygame.draw.line(window, BLACK, (x * CELL_SIZE + GRID_POSITION[0], GRID_POSITION[1]),
-                             (x * CELL_SIZE + GRID_POSITION[0], GRID_POSITION[1] + GRID_HEIGHT), line_weight)
+                             (x * CELL_SIZE + GRID_POSITION[0], GRID_POSITION[1] + GRID_HEIGHT), 1 if x % 3 else 4)
 
             pygame.draw.line(window, BLACK, (GRID_POSITION[0], x * CELL_SIZE + GRID_POSITION[1]),
-                             (GRID_POSITION[0] + GRID_WIDTH, x * CELL_SIZE + GRID_POSITION[1]), line_weight)
+                             (GRID_POSITION[0] + GRID_WIDTH, x * CELL_SIZE + GRID_POSITION[1]), 1 if x % 3 else 4)
 
     def draw_selected_cell(self, window, selected_pos):
         pygame.draw.rect(window, GREEN, (selected_pos[1]*CELL_SIZE+GRID_POSITION[0], selected_pos[0]*CELL_SIZE+GRID_POSITION[1], CELL_SIZE, CELL_SIZE))
 
     def loadBtn(self):
         self.gameButton.append(Button(20, 40, 100, 50, "play"))
+
+    def text_to_screen(self, text, pos, window):
+        font = self.font.render(text, False, BLACK)
+        window.blit(font, pos)
+
+    def draw_numbers(self, window):
+        for i, row in enumerate(self.grid):
+            for j, col in enumerate(row):
+                if col != 0:
+                    pos = [j*CELL_SIZE+GRID_POSITION[0]+20, i*CELL_SIZE+GRID_POSITION[1]+10]
+                    self.text_to_screen(str(col), pos, window)
