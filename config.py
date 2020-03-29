@@ -1,3 +1,11 @@
 WIDTH = 800
 HEIGHT = 800
+
 WHITE = (255,255,255)
+BLACK = (0,0,0)
+
+BOARD = [[0 for x in range(9)] for x in range(9)]
+GRID_POSITION = (170, 230)
+GRID_WIDTH = WIDTH - 350
+GRID_HEIGHT = HEIGHT - 350
+CELL_SIZE = GRID_WIDTH//9
