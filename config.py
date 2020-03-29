@@ -3,6 +3,7 @@ HEIGHT = 800
 
 WHITE = (255,255,255)
 BLACK = (0,0,0)
+GREEN = (0, 150, 136)
 
 BOARD = [[0 for x in range(9)] for x in range(9)]
 GRID_POSITION = (170, 230)
