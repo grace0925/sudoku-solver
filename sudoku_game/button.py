@@ -1,5 +1,5 @@
 import pygame
-from config import *
+from sudoku_game.config import *
 
 
 class Button:
